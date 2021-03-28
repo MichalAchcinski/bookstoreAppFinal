@@ -1,0 +1,56 @@
+.Bd {
+    border: solid 1px white
+}
+
+.P\(0\) {
+    padding: 0
+}
+
+.P\(10\) {
+    padding: 10px
+}
+
+.Ctr {
+    text-align: center
+}
+
+.RB {
+    border-color: red !important;
+}
+
+.RC {
+    color: white !important;
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+/*.my-custom-scrollbar {*/
+/*    position: relative;*/
+/*    height: 700px;*/
+/*    overflow: auto;*/
+/*}*/
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.btn-margin-top {
+    margin-top: 5px;
+}
+
+.welcome {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.welcome h1 {
+    font-size: 70px;
+}
+
+.booksTitle {
+    margin-top: 5px;
+}
