@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Zamówienie</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css">
+</head>
+
+<body class="dark-mode">
+
+<th:block th:include="/navBar"></th:block>
+
+<div class="welcome">
+    <h1 th:if="${message != null}" th:text="${message}" style="text-align:center"></h1>
+</div>
+
+</body>
+
+</html>

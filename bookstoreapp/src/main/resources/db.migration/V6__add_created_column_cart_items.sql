@@ -1,0 +1,1 @@
+alter table cart_items add column created_on datetime null;

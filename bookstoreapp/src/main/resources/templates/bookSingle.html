@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Books</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+<body class="dark-mode">
+
+<th:block th:include="/navBar"></th:block>
+
+<div class="container table-responsive table-body">
+
+    <div class="booksTitle">
+        <h1 th:text="${bookTitle}" class="text-md-center" ></h1>
+    </div>
+
+    <hr>
+
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th>Obraz</th>
+                <th>Tytuł</th>
+                <th>Autor</th>
+                <th>Opis</th>
+                <th>Wydawca</th>
+                <th>Kategoria</th>
+                <th>Liczba stron</th>
+                <th>Cena</th>
+                <th>Data wydania</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="book : ${bookSingle}">
+                <td class="bookId" style="display: none" th:text="${book.id}"></td>
+                <td><img th:attr="src=@{'data:image/jpeg;base64,'+${book.image}}" style="width: 100px;height: 141px"></td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.description}"></td>
+                <td th:text="${book.publisher}"></td>
+                <td th:text="${book.category}"></td>
+                <td th:text="${book.pages}"></td>
+                <td th:text="${book.price}+' '+zł"></td>
+                <td th:text="${book.publishedOn}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/books}" class="btn btn-outline-primary btn-sm mb-3">
+            Cofnij
+        </a>
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"></script>
+
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping info</title>
+    <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm_theme_black.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+
+<body class="dark-mode">
+
+<main>
+    <fieldset>
+        <form class="RB" method="post"  th:action="@{/shop/cart/order/saveshippinginfo}"
+              th:object="${addShippingInfo}">
+            <label>
+                <input id="huuuj" name="huuuj" th:field="*{id}" type="hidden"/>
+            </label>
+            <label>Imię
+                <input type="text" th:field="*{firstName}" th:errorclass="'RB'"/>
+            </label>
+            <label>Nazwisko
+                <input type="text" th:field="*{lastName}" th:errorclass="'RB'"/>
+            </label>
+            <label>Adres
+                <input type="text" th:field="*{address}" th:errorclass="'RB'"/>
+            </label>
+            <label>Kod pocztowy
+                <input type="text" pattern="[0-9]{2}-[0-9]{3}" th:field="*{postcode}" placeholder="xx-xxx" th:errorclass="'RB'"/>
+            </label>
+            <label>Miasto
+                <input type="text" th:field="*{city}" th:errorclass="'RB'"/>
+            </label>
+            <label>Numer telefonu
+                <input type="number" th:field="*{phoneNumber}" th:errorclass="'RB'"/>
+            </label>
+            <p>
+                <button onclick="if (!(confirm('Czy na pewno chcesz dokonać zakupu?'))) return false" type="submit">Kup teraz</button>
+                <button onclick="if (!(confirm('Czy na pewno chcesz dokonać zakupu z zapłatą w formie rat przez 3 miesiące?'))) return false" type="submit" formaction="/shop/cart/order/saveshippinginfoinstallments">Płatność ratalna</button>
+                <button type="reset">Wyczyść pola</button>
+            </p>
+        </form>
+    </fieldset>
+</main>
+
+</body>
+</html>

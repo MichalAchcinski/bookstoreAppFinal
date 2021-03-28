@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm_theme_black.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+<body class="dark-mode">
+
+<main>
+    <fieldset>
+        <form class="RB" method="post" enctype="multipart/form-data" th:action="@{/books/savebook}"
+              th:object="${addbook}">
+
+            <label>Odwzorowanie</label>
+            <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg, image/jpg">
+            <label>Tytul
+                <input type="text" th:field="*{title}" th:errorclass="'RB'"/>
+            </label>
+            <label>Autor
+                <input type="text" th:field="*{author}" th:errorclass="'RB'"/>
+            </label>
+            <label>Opis
+                <input type="text" th:field="*{description}" th:errorclass="'RB'"/>
+            </label>
+            <label>Opublikowano dnia
+                <input type="date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" th:field="*{publishedOn}" th:errorclass="'RB'"/>
+            </label>
+            <label>Wydawnictwo
+                <input type="text" th:field="*{publisher}" th:errorclass="'RB'"/>
+            </label>
+            <label>Kategoria
+                <input type="text" th:field="*{category}" th:errorclass="'RB'"/>
+            </label>
+            <label>Ilość stron
+                <input type="number" th:field="*{pages}" th:errorclass="'RB'"/>
+            </label>
+            <label>Cena
+                <input type="number" step=".01" th:field="*{price}" th:errorclass="'RB'"/>
+            </label>
+            <p>
+                <button type="submit">Zapisz zmiany</button>
+                <button type="reset">Wyczyść pola</button>
+            </p>
+        </form>
+    </fieldset>
+</main>
+
+</body>
+</html>

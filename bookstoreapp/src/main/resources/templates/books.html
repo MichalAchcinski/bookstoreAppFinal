@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Books</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" type="text/css">
+</head>
+<body class="dark-mode">
+
+<th:block th:include="/navBar"></th:block>
+
+<div class="container table-responsive table-body">
+
+    <div class="booksTitle">
+        <h1>Książki</h1>
+    </div>
+
+    <hr>
+
+    <h3 th:if="${message != null}" th:text="${message}"></h3>
+
+    <a class="btn btn-outline-primary btn-sm mb-3" sec:authorize="hasRole('ADMIN')" th:href="@{/books/addbook}">
+        Dodaj książkę
+    </a>
+
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        <table class="table table-hover table-dark table-striped">
+            <thead>
+            <tr>
+                <th>Obraz</th>
+                <th>Tytuł</th>
+                <th>Autor</th>
+                <th>Wydawca</th>
+                <th>Kategoria</th>
+                <th>Liczba stron</th>
+                <th>Cena</th>
+                <th>Data wydania</th>
+                <th>Akcja</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr data-href="/books/" style="cursor: pointer" th:each="book : ${books}">
+                <td class="bookId" style="display: none" th:text="${book.id}"></td>
+                <td><img style="width: 100px;height: 141px" th:attr="src=@{'data:image/jpeg;base64,'+${book.image}}">
+                </td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.publisher}"></td>
+                <td th:text="${book.category}"></td>
+                <td th:text="${book.pages}"></td>
+                <td th:text="${book.price}+' '+zł"></td>
+                <td th:text="${book.publishedOn}"></td>
+                <td>
+                    <a class="btn btn-info btn-sm" sec:authorize="hasRole('ADMIN')"
+                       th:href="@{'books/editbook/'+${book.id}}">
+                        Edytuj
+                    </a>
+                    <a class="btn btn-danger btn-sm btn-margin-top" onclick="if (!(confirm('Czy chcesz usunąć tę książkę?'))) return false"
+                       sec:authorize="hasRole('ADMIN')"
+                       th:href="@{'books/deletebook/'+${book.id}}">
+                        Usuń
+                    </a>
+                    <a class="btn btn-info btn-sm btn-margin-top"
+                       th:href="@{'shop/addbooktocart/'+${book.id}}">
+                        Dodaj do koszyka
+                    </a>
+                    <!--                    <button class="btn btn-primary" id="buttonAdd2Cart">Add to Cart</button>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"></script>
+
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll("tr[data-href]");
+            console.log(rows);
+            rows.forEach(row => {
+                row.addEventListener("click", () => {
+                    let rowIndex = $(row).index();
+                    window.location.href = row.dataset.href + document.getElementsByClassName("bookId")[rowIndex].textContent;
+                });
+            });
+        });
+    </script>
+</div>
+</body>
+</html>
